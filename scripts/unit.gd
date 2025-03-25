@@ -42,6 +42,9 @@ func use_basic_atk():
 	if self != combat.enemy:
 		if basic_atk.damaging == true:
 			combat.enemy.take_damage(basic_atk.value)
+		if basic_atk.healing == true:
+			for ally in combat.allies:
+				ally.heal(basic_atk.value)
 	else:
 		for ally in combat.allies:
 			ally.take_damage(basic_atk.value)
@@ -52,6 +55,9 @@ func use_ability():
 	if self != combat.enemy:
 		if ability.damaging == true:
 			combat.enemy.take_damage(ability.value)
+		if ability.healing == true:
+			for ally in combat.allies:
+				ally.heal(ability.value)
 	else:
 		for ally in combat.allies:
 			ally.take_damage(ability.value)
@@ -60,6 +66,12 @@ func take_damage(amt):
 	health -= amt
 	hp_bar.set_hp(health)
 
+func heal(amt):
+	health += amt
+	if health >= max_health:
+		health = max_health
+	hp_bar.set_hp(health)
+	
 func gain_mana(amt):
 	mana += amt
 	if mana >= max_mana:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://ctah7khl2mqy7"]
+[gd_scene load_steps=8 format=3 uid="uid://ctah7khl2mqy7"]
 
 [ext_resource type="Script" uid="uid://e02aed0l8rkc" path="res://scripts/combat.gd" id="1_rjxhl"]
 [ext_resource type="PackedScene" uid="uid://b4t1qu2vlkt18" path="res://main scenes/unit.tscn" id="2_n4hux"]
@@ -6,6 +6,7 @@
 [ext_resource type="Resource" uid="uid://cpcm7bliucxsv" path="res://resources/basicatks/PhysicalBasic.tres" id="3_miwuo"]
 [ext_resource type="Resource" uid="uid://y41g00ber5gq" path="res://resources/abilities/EnemyAbility.tres" id="4_qjf4b"]
 [ext_resource type="Resource" uid="uid://cmj4ca6ay7uvv" path="res://resources/abilities/PhysicalAbility.tres" id="4_w5ifo"]
+[ext_resource type="Resource" uid="uid://cwa8uyf77q3me" path="res://resources/basicatks/HealingBasic.tres" id="7_qjf4b"]
 
 [node name="Combat" type="Node2D" groups=["combat"]]
 script = ExtResource("1_rjxhl")
@@ -30,6 +31,12 @@ ability = ExtResource("4_w5ifo")
 position = Vector2(213, -4)
 max_health = 100
 basic_atk = ExtResource("3_miwuo")
+ability = ExtResource("4_w5ifo")
+
+[node name="Healer" parent="Allies" instance=ExtResource("2_n4hux")]
+position = Vector2(-168, -1)
+max_health = 100
+basic_atk = ExtResource("7_qjf4b")
 ability = ExtResource("4_w5ifo")
 
 [connection signal="timeout" from="CombatTimer" to="." method="_on_combat_timer_timeout"]

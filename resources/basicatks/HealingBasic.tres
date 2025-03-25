@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Basic_ATK" load_steps=2 format=3 uid="uid://cwa8uyf77q3me"]
+
+[ext_resource type="Script" uid="uid://dgh08i0tqr3qv" path="res://scripts/basic_atk.gd" id="1_e2mcs"]
+
+[resource]
+script = ExtResource("1_e2mcs")
+mana_gen = 5
+cast_timer = 2.0
+name = "HealingBasic"
+value = 3
+element = "physical"
+damaging = false
+healing = true
+shielding = false
+metadata/_custom_type_script = "uid://dgh08i0tqr3qv"
