@@ -1,0 +1,35 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="IdleMultiplayerExperiment"
+run/main_scene="uid://lk70ffh77h5c"
+config/features=PackedStringArray("4.4", "Mobile")
+config/icon="res://icon.svg"
+
+[autoload]
+
+LootLockerSDK="*res://addons/LootLockerSDK/LootLockerSDK.gd"
+DamageNumbers="*res://scripts/DamageNumbers.gd"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/LootLockerSDK/plugin.cfg")
+
+[global_group]
+
+game=""
+autotimer=""
+combat=""
+
+[rendering]
+
+renderer/rendering_method="mobile"

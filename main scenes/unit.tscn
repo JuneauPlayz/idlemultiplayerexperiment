@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=3 uid="uid://b4t1qu2vlkt18"]
+
+[ext_resource type="Script" uid="uid://cpyegfp3y7axm" path="res://scripts/unit.gd" id="1_ctwoc"]
+[ext_resource type="PackedScene" uid="uid://b1hyha80wqqdt" path="res://main scenes/hp_bar.tscn" id="2_davkp"]
+
+[node name="Unit" type="Node2D"]
+script = ExtResource("1_ctwoc")
+
+[node name="TextureRect" type="ColorRect" parent="."]
+offset_left = 235.0
+offset_top = 204.0
+offset_right = 289.0
+offset_bottom = 250.0
+
+[node name="TextureRect2" type="ColorRect" parent="."]
+offset_left = 236.0
+offset_top = 276.0
+offset_right = 290.0
+offset_bottom = 446.0
+
+[node name="HPBar" parent="." instance=ExtResource("2_davkp")]
+visible = true
+offset_left = 178.0
+offset_top = 142.0
+offset_right = 178.0
+offset_bottom = 142.0

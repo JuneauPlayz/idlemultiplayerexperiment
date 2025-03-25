@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Ability" load_steps=2 format=3 uid="uid://cmj4ca6ay7uvv"]
+
+[ext_resource type="Script" uid="uid://b2d0yt45weusj" path="res://scripts/ability.gd" id="1_7ffc7"]
+
+[resource]
+script = ExtResource("1_7ffc7")
+mana_cost = 50
+name = "Punch"
+value = 10
+element = "physical"
+damaging = true
+healing = false
+shielding = false
+metadata/_custom_type_script = "uid://b2d0yt45weusj"

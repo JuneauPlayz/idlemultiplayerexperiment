@@ -1,0 +1,37 @@
+[gd_scene load_steps=3 format=3 uid="uid://ctah7khl2mqy7"]
+
+[ext_resource type="Script" uid="uid://e02aed0l8rkc" path="res://combat.gd" id="1_kx3u1"]
+[ext_resource type="PackedScene" uid="uid://b4t1qu2vlkt18" path="res://unit.tscn" id="2_s0t75"]
+
+[node name="Combat" type="Node2D" groups=["combat"]]
+script = ExtResource("1_kx3u1")
+
+[node name="CombatTimer" type="Timer" parent="."]
+wait_time = 0.1
+
+[node name="Enemy" parent="." instance=ExtResource("2_s0t75")]
+position = Vector2(604, -9)
+base_action_value = null
+auto_time = 3.0
+max_mana = 10
+max_health = 100
+damage = 5
+
+[node name="Allies" type="Node2D" parent="."]
+
+[node name="RangedDPS" parent="Allies" instance=ExtResource("2_s0t75")]
+base_action_value = null
+auto_time = 2.0
+max_mana = 10
+max_health = 100
+damage = 5
+
+[node name="MeleeDPS" parent="Allies" instance=ExtResource("2_s0t75")]
+position = Vector2(213, -4)
+base_action_value = null
+auto_time = 1.5
+max_mana = 10
+max_health = 100
+damage = 5
+
+[connection signal="timeout" from="CombatTimer" to="." method="_on_combat_timer_timeout"]

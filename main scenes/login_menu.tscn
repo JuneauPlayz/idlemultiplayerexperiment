@@ -1,0 +1,155 @@
+[gd_scene load_steps=5 format=3 uid="uid://bkaksfjc62e7j"]
+
+[ext_resource type="Script" uid="uid://dp56nach0ij7h" path="res://main scenes/login_menu.gd" id="1_c2y70"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_bo7d7"]
+font_size = 51
+
+[sub_resource type="LabelSettings" id="LabelSettings_c2y70"]
+font_size = 41
+
+[sub_resource type="LabelSettings" id="LabelSettings_scc0f"]
+font_size = 61
+
+[node name="LoginMenu" type="Node2D"]
+script = ExtResource("1_c2y70")
+
+[node name="Main" type="Node2D" parent="."]
+visible = false
+
+[node name="CreateAccountB" type="Button" parent="Main"]
+offset_right = 204.0
+offset_bottom = 53.0
+text = "Create Account"
+
+[node name="LoginTitle" type="Label" parent="Main"]
+offset_left = 322.0
+offset_top = 104.0
+offset_right = 737.0
+offset_bottom = 178.0
+text = "Login"
+label_settings = SubResource("LabelSettings_bo7d7")
+horizontal_alignment = 1
+
+[node name="LoginConfirm" type="Button" parent="Main"]
+offset_left = 493.0
+offset_top = 330.0
+offset_right = 674.0
+offset_bottom = 373.0
+text = "Confirm"
+
+[node name="DetailsContainer" type="MarginContainer" parent="Main"]
+offset_left = 368.0
+offset_top = 189.0
+offset_right = 690.0
+offset_bottom = 293.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Main/DetailsContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Main/DetailsContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Main/DetailsContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Email:                 "
+
+[node name="Email" type="TextEdit" parent="Main/DetailsContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Main/DetailsContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="Main/DetailsContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "Password:         "
+
+[node name="Password" type="TextEdit" parent="Main/DetailsContainer/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+
+[node name="CreateAccount" type="Node2D" parent="."]
+visible = false
+
+[node name="Label" type="Label" parent="CreateAccount"]
+offset_left = 400.0
+offset_top = 89.0
+offset_right = 703.0
+offset_bottom = 146.0
+text = "Create Account"
+label_settings = SubResource("LabelSettings_c2y70")
+
+[node name="DetailsContainer2" type="MarginContainer" parent="CreateAccount"]
+offset_left = 368.0
+offset_top = 189.0
+offset_right = 690.0
+offset_bottom = 293.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CreateAccount/DetailsContainer2"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CreateAccount/DetailsContainer2/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CreateAccount/DetailsContainer2/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Email:                 "
+
+[node name="Email" type="TextEdit" parent="CreateAccount/DetailsContainer2/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="CreateAccount/DetailsContainer2/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="CreateAccount/DetailsContainer2/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "Password:         "
+
+[node name="Password" type="TextEdit" parent="CreateAccount/DetailsContainer2/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+
+[node name="BackToLogin" type="Button" parent="CreateAccount"]
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 163.0
+offset_bottom = 64.0
+text = "Back To Login"
+
+[node name="CreateAccConfirm" type="Button" parent="CreateAccount"]
+offset_left = 493.0
+offset_top = 330.0
+offset_right = 674.0
+offset_bottom = 373.0
+text = "Confirm"
+
+[node name="ChooseName" type="Node2D" parent="."]
+
+[node name="Title" type="Label" parent="ChooseName"]
+offset_left = 385.0
+offset_top = 21.0
+offset_right = 748.0
+offset_bottom = 121.0
+text = "Pick a Name"
+label_settings = SubResource("LabelSettings_scc0f")
+
+[node name="Name" type="TextEdit" parent="ChooseName"]
+offset_left = 329.0
+offset_top = 127.0
+offset_right = 829.0
+offset_bottom = 210.0
+
+[node name="NameConfirm" type="Button" parent="ChooseName"]
+offset_left = 417.0
+offset_top = 285.0
+offset_right = 744.0
+offset_bottom = 339.0
+text = "Confirm"
+
+[connection signal="pressed" from="Main/CreateAccountB" to="." method="_on_create_account_b_pressed"]
+[connection signal="pressed" from="Main/LoginConfirm" to="." method="_on_login_confirm_pressed"]
+[connection signal="pressed" from="CreateAccount/BackToLogin" to="." method="_on_back_to_login_pressed"]
+[connection signal="pressed" from="CreateAccount/CreateAccConfirm" to="." method="_on_create_acc_confirm_pressed"]
+[connection signal="pressed" from="ChooseName/NameConfirm" to="." method="_on_name_confirm_pressed"]
