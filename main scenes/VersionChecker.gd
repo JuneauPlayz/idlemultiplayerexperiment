@@ -1,7 +1,7 @@
 extends Node
 
-const VERSION_URL = "https://raw.githubusercontent.com/JuneauPlayz/idlemultiplayerexperiment/main/version.txt"
-const CURRENT_VERSION = "1.0.1"
+const VERSION_URL = "https://raw.githubusercontent.com/JuneauPlayz/idlemultiplayerexperiment/refs/heads/main/version.txt"
+const CURRENT_VERSION = "0.0.1"
 
 func check_version():
 	var http = HTTPRequest.new()
@@ -25,7 +25,7 @@ func check_version():
 	
 	var remote_version = result[3].get_string_from_utf8().strip_edges()
 	
-	if _is_version_newer(remote_version, CURRENT_VERSION):
+	if remote_version != CURRENT_VERSION:
 		print("tehre is a new version")
 		return {
 			"status": "update", 
@@ -35,14 +35,3 @@ func check_version():
 	else:
 		print("you have the current version")
 		return {"status": "current"}
-
-func _is_version_newer(remote: String, local: String) -> bool:
-	var remote_parts = remote.split(".")
-	var local_parts = local.split(".")
-	
-	for i in 3:  # Major.Minor.Patch
-		var r = remote_parts[i].to_int() if i < remote_parts.size() else 0
-		var l = local_parts[i].to_int() if i < local_parts.size() else 0
-		if r > l: return true
-		if r < l: return false
-	return false

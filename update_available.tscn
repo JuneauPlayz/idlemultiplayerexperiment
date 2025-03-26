@@ -1,0 +1,34 @@
+[gd_scene load_steps=3 format=3 uid="uid://bjpslly05wijw"]
+
+[ext_resource type="Script" uid="uid://5n0vsr0xfcpw" path="res://update_available.gd" id="1_3totv"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_ch6as"]
+font_size = 41
+
+[node name="UpdateAvailable" type="Node2D"]
+script = ExtResource("1_3totv")
+
+[node name="Label" type="Label" parent="."]
+offset_left = 220.0
+offset_top = 106.0
+offset_right = 835.0
+offset_bottom = 163.0
+text = "there is a new update available"
+label_settings = SubResource("LabelSettings_ch6as")
+
+[node name="Close Game" type="Button" parent="."]
+offset_left = 424.0
+offset_top = 296.0
+offset_right = 595.0
+offset_bottom = 339.0
+text = "Close game"
+
+[node name="Open Releases Page" type="Button" parent="."]
+offset_left = 427.0
+offset_top = 230.0
+offset_right = 598.0
+offset_bottom = 273.0
+text = "open releases page"
+
+[connection signal="pressed" from="Close Game" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Open Releases Page" to="." method="_on_open_releases_page_pressed"]

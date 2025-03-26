@@ -1,10 +1,18 @@
-[gd_scene load_steps=3 format=3 uid="uid://lk70ffh77h5c"]
+[gd_scene load_steps=5 format=3 uid="uid://lk70ffh77h5c"]
 
 [ext_resource type="Script" uid="uid://nc0uogbci16j" path="res://scripts/game.gd" id="1_vrht4"]
 [ext_resource type="Script" uid="uid://bi7c51dwjq7ha" path="res://main scenes/VersionChecker.gd" id="2_mfkfr"]
+[ext_resource type="Script" uid="uid://p2671gel2rro" path="res://scripts/loot_locker_manager.gd" id="3_iuj4q"]
+[ext_resource type="Script" uid="uid://dnuo6yrebtvqs" path="res://inventory.gd" id="4_huykm"]
 
 [node name="Game" type="Node2D" groups=["game"]]
 script = ExtResource("1_vrht4")
 
 [node name="VersionChecker" type="Node" parent="."]
 script = ExtResource("2_mfkfr")
+
+[node name="LootLockerManager" type="Node" parent="."]
+script = ExtResource("3_iuj4q")
+
+[node name="Inventory" type="Node" parent="."]
+script = ExtResource("4_huykm")

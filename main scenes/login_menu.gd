@@ -13,7 +13,7 @@ extends Node2D
 
 @onready var name_entered: TextEdit = $ChooseName/Name
 
-
+var game
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -53,19 +53,21 @@ func _on_create_acc_confirm_pressed() -> void:
 func _on_login_confirm_pressed() -> void:
 	login_confirm.text = "finding account..."
 	login_confirm.disabled = true
+	game = get_tree().get_first_node_in_group("game")
 	var response = await LL_WhiteLabel.LoginAndStartSession.new(login_email.text, login_password.text).send()
 	if(!response.success) :
 		DamageNumbers.display_text(login_confirm.global_position + Vector2(0,100), "none", "Couldn't find account", 48)
 		pass
 	else:
 		# Request succeeded, use response as applicable in your game logic
+		LL.session_token = response.session_token
+		LL.player_id = response.player_id
 		var response2 = await LL_Players.GetPlayersActiveName.new().send()
 		if(!response2.success):
 			DamageNumbers.display_text(login_confirm.global_position + Vector2(0,100), "none", "Error", 48)
 			choose_name()
 			pass
 		else:
-			var game = get_tree().get_first_node_in_group("game")
 			if response2.name != "":
 				game.account_name = response2.name
 				game.new_scene(game.MAIN_MENU)

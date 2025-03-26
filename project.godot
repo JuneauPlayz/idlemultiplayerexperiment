@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 LootLockerSDK="*res://addons/LootLockerSDK/LootLockerSDK.gd"
 DamageNumbers="*res://scripts/DamageNumbers.gd"
+LL="*res://scripts/loot_locker_manager.gd"
 
 [editor_plugins]
 

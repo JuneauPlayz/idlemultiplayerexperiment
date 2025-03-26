@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://lk70ffh77h5c"]
+
+[ext_resource type="Script" uid="uid://nc0uogbci16j" path="res://scripts/game.gd" id="1_vrht4"]
+[ext_resource type="Script" uid="uid://bi7c51dwjq7ha" path="res://main scenes/VersionChecker.gd" id="2_mfkfr"]
+
+[node name="Game" type="Node2D" groups=["game"]]
+script = ExtResource("1_vrht4")
+
+[node name="VersionChecker" type="Node" parent="."]
+script = ExtResource("2_mfkfr")
