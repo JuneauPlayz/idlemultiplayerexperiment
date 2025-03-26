@@ -2,7 +2,6 @@ extends Node2D
 
 const LOGIN_MENU = preload("res://main scenes/login_menu.tscn")
 const MAIN_MENU = preload("res://main scenes/main_menu.tscn")
-const COMBAT = preload("res://main scenes/combat.tscn")
 
 var current_scene
 var account_name = ""
