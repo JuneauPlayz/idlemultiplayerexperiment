@@ -26,12 +26,14 @@ func check_version():
 	var remote_version = result[3].get_string_from_utf8().strip_edges()
 	
 	if _is_version_newer(remote_version, CURRENT_VERSION):
+		print("tehre is a new version")
 		return {
 			"status": "update", 
 			"current": CURRENT_VERSION,
 			"available": remote_version
 		}
 	else:
+		print("you have the current version")
 		return {"status": "current"}
 
 func _is_version_newer(remote: String, local: String) -> bool:
