@@ -26,6 +26,8 @@ func _ready() -> void:
 func new_scene(scene):
 	if current_scene != null:
 		current_scene.queue_free()
+	if scene == MAIN_MENU:
+		load_inventory()
 	current_scene = scene.instantiate()
 	self.add_child(current_scene)
 

@@ -36,3 +36,20 @@ layout_mode = 2
 
 [node name="Inventory" type="Node" parent="."]
 script = ExtResource("2_n8b2i")
+
+[node name="Button" type="Button" parent="."]
+offset_left = 500.0
+offset_top = 105.0
+offset_right = 701.0
+offset_bottom = 136.0
+text = "Show Phys DPS Weapons"
+
+[node name="Button2" type="Button" parent="."]
+offset_left = 505.0
+offset_top = 153.0
+offset_right = 706.0
+offset_bottom = 184.0
+text = "Show Magic Hats"
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Button2" to="." method="_on_button_2_pressed"]
