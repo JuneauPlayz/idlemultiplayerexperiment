@@ -1,50 +1,71 @@
 extends Node
 
-# Configuration
-
-var session_token := ""
-
 # Signals
-signal inventory_loaded(items: Array)
+signal inventory_updated(items: Array)
+signal inventory_loaded(items: Array)  # Array of item dictionaries
 signal inventory_error(message: String)
 
-# Nodes
-@onready var http_request := HTTPRequest.new()
-
-func _ready():
-	add_child(http_request)
-	#http_request.request_completed.connect(_on_request_completed)
-
-## Call this after player authentication
-func fetch_inventory():
-	var url = "https://api.lootlocker.io/game/v1/player/inventory/list"  # Updated endpoint
-	var headers = [
-		"Content-Type: application/json",
-		"x-session-token: %s" % LL.session_token
-	]
-
+## Add item to player's inventory
+func add_item(player_id: String, item_id: String, item_name: String, quantity: int = 1) -> void:
+	var response = await MongoDBClient.make_request(
+		"/players/%s/inventory" % player_id,
+		HTTPClient.METHOD_POST,
+		{
+			"itemId": item_id,
+			"name": item_name,
+			"quantity": quantity
+		}
+	)
 	
-	var error = http_request.request(url, headers, HTTPClient.METHOD_GET)
-	if error != OK:
-		push_error("Failed to start inventory request")
+	_handle_response(response)
+
+## Get player's inventory
+func fetch_inventory(player_id: String) -> Array:
+	var response = await MongoDBClient.make_request(
+		"/players/%s/inventory" % player_id,
+		HTTPClient.METHOD_GET
+	)
+	
+	if response.get("success", false):
+		var inventory_items = []
+		
+		# Transform MongoDB items to dictionary format
+		for item in response.get("inventory", []):
+			inventory_items.append({
+				"id": item.get("itemId", ""),
+				"name": item.get("name", "Unknown"),
+				"quantity": item.get("quantity", 1),
+			})
+		
+		emit_signal("inventory_loaded", inventory_items)
+		return inventory_items
+	else:
+		var error_msg = response.get("error", "Failed to fetch inventory")
+		emit_signal("inventory_error", error_msg)
+		push_error("Inventory error: ", error_msg)
 		return []
-	
-	var result = await http_request.request_completed
-	var response = JSON.parse_string(result[3].get_string_from_utf8())
-	
-	if result[1] != 200:  # Check HTTP status code
-		push_error("Inventory error: ", response.get("message", "Unknown error"))
-		return []
-	
-	var inventory_items = []
-	for asset in response['inventory']:
-		inventory_items.append(asset['asset'])
-	return inventory_items
 
-# Helper function to find specific file types
-func _find_file_url(item: Dictionary, file_type: String) -> String:
-	var files = item.get("asset", {}).get("files", [])
-	for file in files:
-		if file_type in file.get("url", ""):
-			return file["url"]
-	return ""
+## Helper function to get item icon path
+func _get_item_icon(item_id: String) -> String:
+	# Implement your own icon mapping logic
+	return "res://assets/icons/items/%s.png" % item_id
+
+## Update item quantity
+func update_item(player_id: String, item_id: String, new_quantity: int) -> void:
+	var response = await MongoDBClient.make_request(
+		"/players/%s/inventory/%s" % [player_id, item_id],
+		HTTPClient.METHOD_PATCH,
+		{ "quantity": new_quantity }
+	)
+	_handle_response(response)
+
+## Handle all responses
+func _handle_response(response: Dictionary) -> void:
+	if response.get("success", false):
+		emit_signal("inventory_updated", response.get("inventory", []))
+	else:
+		var error_msg = response.get("error", "Unknown error occurred")
+		emit_signal("inventory_error", error_msg)
+		push_error("Inventory error: ", error_msg)
+		if response.has("raw"):
+			print("Raw response: ", response.raw)

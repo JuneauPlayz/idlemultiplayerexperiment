@@ -13,9 +13,11 @@ extends Node2D
 @onready var name_entered: TextEdit = $ChooseName/Name
 
 var game
+var session_token: String
 var player_id: String
 
 func _ready() -> void:
+	game = get_tree().get_first_node_in_group("game")
 	main.visible = true
 	create_account.visible = false
 	choose_name_group.visible = false
@@ -32,6 +34,7 @@ func _on_create_acc_confirm_pressed() -> void:
 	create_acc_confirm.text = "creating account..."
 	create_acc_confirm.disabled = true
 	
+	
 	# Validate input
 	if create_password.text.length() < 8:
 		show_error(create_acc_confirm, "Password must be at least 8 characters")
@@ -42,15 +45,24 @@ func _on_create_acc_confirm_pressed() -> void:
 		"/players",
 		HTTPClient.METHOD_POST,
 		{
-			"email": create_email.text,
+			"email": create_email.text.strip_edges().to_lower(),
 			"password": create_password.text,
 			"name": ""
-		},
-		headers
+		}
 	)
 	
+	print("Registration response: ", response) # Debug output
+	
 	if !response.success:
-		show_error(create_acc_confirm, response.error)
+		if response.has("debug"):
+			print("Debug info: ", response.debug) # Log additional info
+			
+		var error_msg = response.get("error", "Registration failed")
+		show_error(create_acc_confirm, error_msg)
+		
+		# Clear fields if email exists
+		if "already exists" in error_msg:
+			create_email.text = ""
 	else:
 		show_success(create_acc_confirm, "Account created!")
 		player_id = response.player_id
@@ -60,31 +72,31 @@ func _on_login_confirm_pressed() -> void:
 	login_confirm.text = "finding account..."
 	login_confirm.disabled = true
 	
-	var headers = ["Content-Type: application/json"]
 	var response = await MongoDBClient.make_request(
 		"/sessions",
 		HTTPClient.METHOD_POST,
 		{
 			"email": login_email.text,
 			"password": login_password.text
-		},
-		headers
+		}
 	)
 	
 	if !response.success:
 		show_error(login_confirm, "Invalid email or password")
 	else:
 		player_id = response.player_id
+		#session_token = response.session_token
 		
 		# Get player data
 		var player_data = await MongoDBClient.make_request(
 			"/players/" + player_id,
 			HTTPClient.METHOD_GET,
 			{},
-			headers
+			{ "Authorization": "Bearer " + session_token }
 		)
 		
 		if player_data.success:
+			game.player_id = player_id
 			if player_data.name == "":
 				choose_name()
 			else:
@@ -101,12 +113,11 @@ func _on_name_confirm_pressed() -> void:
 		show_error(name_entered, "Name must be at least 3 characters")
 		return
 	
-	var headers = ["Content-Type: application/json"]
 	var response = await MongoDBClient.make_request(
 		"/players/" + player_id + "/name",
-		headers,
 		HTTPClient.METHOD_PUT,
 		{ "name": name_entered.text },
+		{ "Authorization": "Bearer " + session_token }
 	)
 	
 	if !response.success:

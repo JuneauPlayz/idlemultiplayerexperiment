@@ -14,4 +14,16 @@ func _process(delta: float) -> void:
 
 
 func _on_tank_gear_pressed() -> void:
-	game.new_scene(game.CHANGE_EQUIPMENT)
+	game.new_scene(game.CHANGE_EQUIPMENT, C.TANK)
+
+
+func _on_phys_gear_pressed() -> void:
+	game.new_scene(game.CHANGE_EQUIPMENT, C.PHYS)
+
+
+func _on_mag_gear_pressed() -> void:
+	game.new_scene(game.CHANGE_EQUIPMENT, C.MAG)
+
+
+func _on_heal_gear_pressed() -> void:
+	game.new_scene(game.CHANGE_EQUIPMENT, C.HEAL)

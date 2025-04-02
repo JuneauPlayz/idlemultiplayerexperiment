@@ -23,6 +23,7 @@ offset_left = 81.0
 offset_top = 92.0
 offset_right = 429.0
 offset_bottom = 604.0
+mouse_filter = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
 layout_mode = 2
@@ -37,19 +38,168 @@ layout_mode = 2
 [node name="Inventory" type="Node" parent="."]
 script = ExtResource("2_n8b2i")
 
-[node name="Button" type="Button" parent="."]
-offset_left = 500.0
-offset_top = 105.0
-offset_right = 701.0
-offset_bottom = 136.0
-text = "Show Phys DPS Weapons"
+[node name="Equipped" type="HBoxContainer" parent="."]
+offset_left = 566.0
+offset_top = 96.0
+offset_right = 1016.0
+offset_bottom = 575.0
+theme_override_constants/separation = 250
 
-[node name="Button2" type="Button" parent="."]
-offset_left = 505.0
-offset_top = 153.0
-offset_right = 706.0
-offset_bottom = 184.0
-text = "Show Magic Hats"
+[node name="FirstColumn" type="VBoxContainer" parent="Equipped"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 50
+alignment = 1
 
-[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
-[connection signal="pressed" from="Button2" to="." method="_on_button_2_pressed"]
+[node name="BasicGemContainer" type="PanelContainer" parent="Equipped/FirstColumn"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="BasicGem" type="TextureButton" parent="Equipped/FirstColumn/BasicGemContainer"]
+layout_mode = 2
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="HeadpieceContainer" type="PanelContainer" parent="Equipped/FirstColumn"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Headpiece" type="TextureButton" parent="Equipped/FirstColumn/HeadpieceContainer"]
+layout_mode = 2
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="ChestpieceContainer" type="PanelContainer" parent="Equipped/FirstColumn"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Chestpiece" type="TextureButton" parent="Equipped/FirstColumn/ChestpieceContainer"]
+layout_mode = 2
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="WeaponContainer" type="PanelContainer" parent="Equipped/FirstColumn"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Weapon" type="TextureButton" parent="Equipped/FirstColumn/WeaponContainer"]
+layout_mode = 2
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="SecondColumn" type="VBoxContainer" parent="Equipped"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 50
+alignment = 1
+
+[node name="AbilityGemContainer" type="PanelContainer" parent="Equipped/SecondColumn"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="AbilityGem" type="TextureButton" parent="Equipped/SecondColumn/AbilityGemContainer"]
+layout_mode = 2
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="LeggingsContainer" type="PanelContainer" parent="Equipped/SecondColumn"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Leggings" type="TextureButton" parent="Equipped/SecondColumn/LeggingsContainer"]
+layout_mode = 2
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="BootsContainer" type="PanelContainer" parent="Equipped/SecondColumn"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Boots" type="TextureButton" parent="Equipped/SecondColumn/BootsContainer"]
+layout_mode = 2
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="AccessoryContainer" type="PanelContainer" parent="Equipped/SecondColumn"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Accessory" type="TextureButton" parent="Equipped/SecondColumn/AccessoryContainer"]
+layout_mode = 2
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Back" type="Button" parent="."]
+offset_left = 980.0
+offset_top = 15.0
+offset_right = 1137.0
+offset_bottom = 46.0
+text = "Back to Main Menu"
+
+[node name="Text" type="Node" parent="."]
+
+[node name="BasicGemText" type="Label" parent="Text"]
+offset_left = 575.0
+offset_top = 178.0
+offset_right = 656.0
+offset_bottom = 201.0
+text = "Basic Gem"
+
+[node name="AbilityGemText" type="Label" parent="Text"]
+offset_left = 922.0
+offset_top = 178.0
+offset_right = 1012.0
+offset_bottom = 201.0
+text = "Ability Gem"
+
+[node name="HeadpieceText" type="Label" parent="Text"]
+offset_left = 578.0
+offset_top = 313.0
+offset_right = 660.0
+offset_bottom = 336.0
+text = "Headpiece"
+
+[node name="ChestpieceText" type="Label" parent="Text"]
+offset_left = 576.0
+offset_top = 441.0
+offset_right = 661.0
+offset_bottom = 464.0
+text = "Chestpiece"
+
+[node name="LeggingsText" type="Label" parent="Text"]
+offset_left = 933.0
+offset_top = 311.0
+offset_right = 1001.0
+offset_bottom = 334.0
+text = "Leggings"
+
+[node name="BootsText" type="Label" parent="Text"]
+offset_left = 945.0
+offset_top = 443.0
+offset_right = 990.0
+offset_bottom = 466.0
+text = "Boots"
+
+[node name="WeaponText" type="Label" parent="Text"]
+offset_left = 585.0
+offset_top = 579.0
+offset_right = 649.0
+offset_bottom = 602.0
+text = "Weapon"
+
+[node name="AccessoryText" type="Label" parent="Text"]
+offset_left = 930.0
+offset_top = 578.0
+offset_right = 1007.0
+offset_bottom = 601.0
+text = "Accessory"
+
+[connection signal="pressed" from="Equipped/FirstColumn/BasicGemContainer/BasicGem" to="." method="_on_basic_gem_pressed"]
+[connection signal="pressed" from="Equipped/FirstColumn/HeadpieceContainer/Headpiece" to="." method="_on_headpiece_pressed"]
+[connection signal="pressed" from="Equipped/FirstColumn/ChestpieceContainer/Chestpiece" to="." method="_on_chestpiece_pressed"]
+[connection signal="pressed" from="Equipped/FirstColumn/WeaponContainer/Weapon" to="." method="_on_weapon_pressed"]
+[connection signal="pressed" from="Equipped/SecondColumn/AbilityGemContainer/AbilityGem" to="." method="_on_ability_gem_pressed"]
+[connection signal="pressed" from="Equipped/SecondColumn/LeggingsContainer/Leggings" to="." method="_on_leggings_pressed"]
+[connection signal="pressed" from="Equipped/SecondColumn/BootsContainer/Boots" to="." method="_on_boots_pressed"]
+[connection signal="pressed" from="Equipped/SecondColumn/AccessoryContainer/Accessory" to="." method="_on_accessory_pressed"]
+[connection signal="pressed" from="Back" to="." method="_on_back_pressed"]
