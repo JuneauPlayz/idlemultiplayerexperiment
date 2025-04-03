@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Equipment" load_steps=2 format=3 uid="uid://cu44s6dut21uj"]
+
+[ext_resource type="Script" uid="uid://bam7b0i72s275" path="res://scripts/equipment.gd" id="1_jwrgl"]
+
+[resource]
+script = ExtResource("1_jwrgl")
+type = "PhysicalDPSWeapon"
+name = "Wooden Sword"
+health = 0
+power = 0
+metadata/_custom_type_script = "uid://bam7b0i72s275"

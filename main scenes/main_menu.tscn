@@ -52,6 +52,7 @@ offset_right = 224.0
 offset_bottom = 415.0
 text = "Edit Healer Gear"
 
+[connection signal="pressed" from="Dungeons" to="." method="_on_dungeons_pressed"]
 [connection signal="pressed" from="TankGear" to="." method="_on_tank_gear_pressed"]
 [connection signal="pressed" from="PhysGear" to="." method="_on_phys_gear_pressed"]
 [connection signal="pressed" from="MagGear" to="." method="_on_mag_gear_pressed"]

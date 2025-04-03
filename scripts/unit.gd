@@ -6,10 +6,12 @@ var max_mana : int
 var mana : int
 @export var max_health : int
 var health : int
+var power : int
 
 var basic_time_left
 var basic_starting_time
 
+var loadout = []
 @export var basic_atk : Basic_ATK
 @export var ability : Ability
 
@@ -18,12 +20,7 @@ var combat
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	mana = 0
-	max_mana = ability.mana_cost
-	health = max_health
-	basic_time_left = basic_atk.cast_timer
-	basic_starting_time = basic_atk.cast_timer
-	update_hp_bar()
+	combat = get_tree().get_first_node_in_group("combat")
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -38,7 +35,6 @@ func decrease_basic_atk_time(amt):
 	hp_bar.set_auto_time(basic_time_left)
 
 func use_basic_atk():
-	combat = get_tree().get_first_node_in_group("combat")
 	if self != combat.enemy:
 		if basic_atk.damaging == true:
 			combat.enemy.take_damage(basic_atk.value)
@@ -86,3 +82,28 @@ func update_hp_bar():
 	hp_bar.set_mana(mana)
 	hp_bar.set_starting_auto_time(basic_starting_time)
 	hp_bar.set_auto_time(basic_time_left)
+
+func update_stats():
+	basic_atk = loadout[0]
+	ability = loadout[1]
+	for item in loadout:
+		if item is not Skill and item != null:
+			self.max_health += item.health
+			self.power += item.power
+	mana = 0
+	max_mana = ability.mana_cost
+	health = max_health
+	basic_time_left = basic_atk.cast_timer
+	basic_starting_time = basic_atk.cast_timer
+	update_hp_bar()
+
+func load_enemy_stats(res):
+	basic_atk = res.basic_atk
+	ability = res.ability
+	max_health = res.max_health
+	health = max_health
+	basic_time_left = basic_atk.cast_timer
+	basic_starting_time = basic_atk.cast_timer
+	mana = 0
+	max_mana = ability.mana_cost
+	update_hp_bar()

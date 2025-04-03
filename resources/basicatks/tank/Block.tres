@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="Basic_ATK" load_steps=2 format=3 uid="uid://d2j2yx8g07l2w"]
+
+[ext_resource type="Script" uid="uid://dgh08i0tqr3qv" path="res://scripts/basic_atk.gd" id="1_4q6od"]
+
+[resource]
+script = ExtResource("1_4q6od")
+mana_gen = 3
+cast_timer = 1.0
+type = "TankBasicGem"
+name = "Block"
+value = 1
+element = "physical"
+damaging = true
+healing = false
+shielding = false
+metadata/_custom_type_script = "uid://dgh08i0tqr3qv"

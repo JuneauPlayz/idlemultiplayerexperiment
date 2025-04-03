@@ -27,3 +27,7 @@ func _on_mag_gear_pressed() -> void:
 
 func _on_heal_gear_pressed() -> void:
 	game.new_scene(game.CHANGE_EQUIPMENT, C.HEAL)
+
+
+func _on_dungeons_pressed() -> void:
+	game.new_scene(game.DUNGEON_CHOICE, null)

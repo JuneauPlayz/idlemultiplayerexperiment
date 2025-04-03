@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Equipment" load_steps=2 format=3 uid="uid://c5gcs1teo0ijb"]
+
+[ext_resource type="Script" uid="uid://bam7b0i72s275" path="res://scripts/equipment.gd" id="1_eds4d"]
+
+[resource]
+script = ExtResource("1_eds4d")
+type = "MagicDPSWeapon"
+name = "Wooden Wand"
+health = 0
+power = 0
+metadata/_custom_type_script = "uid://bam7b0i72s275"

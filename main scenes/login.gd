@@ -66,6 +66,7 @@ func _on_create_acc_confirm_pressed() -> void:
 	else:
 		show_success(create_acc_confirm, "Account created!")
 		player_id = response.player_id
+		load_new_acc()
 		choose_name()
 
 func _on_login_confirm_pressed() -> void:
@@ -98,6 +99,7 @@ func _on_login_confirm_pressed() -> void:
 		if player_data.success:
 			game.player_id = player_id
 			if player_data.name == "":
+				load_new_acc()
 				choose_name()
 			else:
 				game.account_name = player_data.name
@@ -108,6 +110,13 @@ func choose_name():
 	create_account.visible = false
 	choose_name_group.visible = true
 
+func load_new_acc():
+	await game.load_inventory()
+	for item in C.starting_items:
+		game.inventory_manager.add_item(player_id, item[0], item[1])
+
+	
+	
 func _on_name_confirm_pressed() -> void:
 	if name_entered.text.length() < 3:
 		show_error(name_entered, "Name must be at least 3 characters")

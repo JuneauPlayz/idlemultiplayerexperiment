@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="Ability" load_steps=3 format=3 uid="uid://cmov4vutwgib8"]
+
+[ext_resource type="Script" uid="uid://b2d0yt45weusj" path="res://scripts/ability.gd" id="1_ab2y5"]
+[ext_resource type="Texture2D" uid="uid://b6stqcssem0a4" path="res://quyestionmark.png" id="2_daf6a"]
+
+[resource]
+script = ExtResource("1_ab2y5")
+mana_cost = 20
+sprite = ExtResource("2_daf6a")
+type = "HealerAbilityGem"
+name = "Healing Aura"
+value = 10
+element = "physical"
+damaging = false
+healing = true
+shielding = false
+metadata/_custom_type_script = "uid://b2d0yt45weusj"

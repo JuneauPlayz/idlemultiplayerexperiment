@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="Basic_ATK" load_steps=2 format=3 uid="uid://cww8jx54wp4ei"]
+
+[ext_resource type="Script" uid="uid://dgh08i0tqr3qv" path="res://scripts/basic_atk.gd" id="1_iy066"]
+
+[resource]
+script = ExtResource("1_iy066")
+mana_gen = 5
+cast_timer = 2.0
+type = ""
+name = "Yuh"
+value = 5
+element = "physical"
+damaging = true
+healing = false
+shielding = false
+metadata/_custom_type_script = "uid://dgh08i0tqr3qv"

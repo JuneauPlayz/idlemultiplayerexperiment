@@ -1,5 +1,35 @@
 extends Node
 
+var starting_items = [
+	# Starter gear
+	["Starter Hat", 1],
+	["Starter Chestpiece", 1],
+	["Starter Leggings", 1],
+	["Starter Boots", 1],
+	
+	# Tank
+	["Block", 1],
+	["Shields Up", 1],
+	["Wooden Shield", 1],
+	
+	# Physical DPS
+	["Basic Strike", 1],
+	["Slash", 1],
+	["Wooden Sword", 1],
+	
+	# Magic DPS
+	["Basic Spell", 1],
+	["Fireball", 1],
+	["Wooden Wand", 1],
+	
+	# Healer
+	["Basic Heal", 1],
+	["Healing Aura", 1],
+	["Wooden Staff", 1]
+]
+
+# Add all items in a loop
+
 # Character Types
 var TANK = "Tank"
 var PHYS = "PhysicalDPS"
@@ -64,3 +94,5 @@ var LEGN = 4
 var BOOTSN = 5
 var WEAPONN = 6
 var ACCN = 7
+
+const DUNGEON_1 = preload("res://fights/dungeon1/Dungeon1.tres")

@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Equipment" load_steps=2 format=3 uid="uid://b8o86c6ic0i0"]
+
+[ext_resource type="Script" uid="uid://bam7b0i72s275" path="res://scripts/equipment.gd" id="1_sulse"]
+
+[resource]
+script = ExtResource("1_sulse")
+type = "Chestpiece"
+name = "Starter Chestpiece"
+health = 7
+power = 0
+metadata/_custom_type_script = "uid://bam7b0i72s275"

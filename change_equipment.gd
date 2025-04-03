@@ -9,6 +9,14 @@ const INVENTORY_ITEM = preload("res://inventory_item.tscn")
 @onready var leggings: TextureButton = $Equipped/SecondColumn/LeggingsContainer/Leggings
 @onready var boots: TextureButton = $Equipped/SecondColumn/BootsContainer/Boots
 @onready var accessory: TextureButton = $Equipped/SecondColumn/AccessoryContainer/Accessory
+@onready var basic_gem_text: Label = $Text/BasicGemText
+@onready var ability_gem_text: Label = $Text/AbilityGemText
+@onready var headpiece_text: Label = $Text/HeadpieceText
+@onready var chestpiece_text: Label = $Text/ChestpieceText
+@onready var leggings_text: Label = $Text/LeggingsText
+@onready var boots_text: Label = $Text/BootsText
+@onready var weapon_text: Label = $Text/WeaponText
+@onready var accessory_text: Label = $Text/AccessoryText
 
 const QUYESTIONMARK = preload("res://quyestionmark.png")
 
@@ -18,19 +26,29 @@ var currently_equipping
 
 func _ready() -> void:
 	game = get_tree().get_first_node_in_group("game")
+	match type:
+		C.TANK:
+			load_loadout(game.tank_gear)
+		C.PHYS:
+			load_loadout(game.physdps_gear)
+		C.MAG:
+			load_loadout(game.magicdps_gear)
+		C.HEAL:
+			load_loadout(game.healer_gear)
 
+	
 func show_items(type, general):
 	for item in item_showcase.get_children():
 		item.queue_free()
 	for item in game.get_items(type):
 		var new_item = INVENTORY_ITEM.instantiate()
 		item_showcase.add_child(new_item)
-		new_item.update(QUYESTIONMARK, item['name'], item)
+		new_item.update(QUYESTIONMARK, item["res"].name, item["res"])
 	if general != null:
 		for item in game.get_items(general):
 			var new_item = INVENTORY_ITEM.instantiate()
 			item_showcase.add_child(new_item)
-			new_item.update(QUYESTIONMARK, item['name'], item)
+			new_item.update(QUYESTIONMARK, item["res"].name, item["res"])
 
 func update(type):
 	match type:
@@ -69,7 +87,18 @@ func update_equip(item, image):
 		C.ACC:
 			update_all(accessory, image)
 			game.update_equipment(self.type, item)
-			
+
+func load_loadout(loadout):
+	var equipments = [basic_gem, ability_gem, headpiece, chestpiece, leggings, boots, weapon, accessory]
+	for item in loadout:
+		if item != null:
+			print(item.name)
+	for n in loadout.size():
+		if loadout[n] != null:
+			if loadout[n].sprite == null:
+				update_all(equipments[n], QUYESTIONMARK)
+			else:
+				update_all(equipments[n], loadout[n].sprite)
 func update_all(button, image):
 	button.texture_normal = image
 	button.texture_pressed = image

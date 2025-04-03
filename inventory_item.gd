@@ -18,9 +18,7 @@ func update(image, name, item):
 	self.item = item
 
 func _on_image_pressed() -> void:
-	print("bello")
 	game.current_scene.update_equip(item, current_image)
-	print("hello")
 	
 func update_all(new_image):
 	self.image.texture_normal = new_image

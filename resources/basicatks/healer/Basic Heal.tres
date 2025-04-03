@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="Basic_ATK" load_steps=2 format=3 uid="uid://ceh5t47qo1f6p"]
+
+[ext_resource type="Script" uid="uid://dgh08i0tqr3qv" path="res://scripts/basic_atk.gd" id="1_uba60"]
+
+[resource]
+script = ExtResource("1_uba60")
+mana_gen = 5
+cast_timer = 1.5
+type = "HealerBasicGem"
+name = "Basic Heal"
+value = 5
+element = "physical"
+damaging = false
+healing = true
+shielding = false
+metadata/_custom_type_script = "uid://dgh08i0tqr3qv"

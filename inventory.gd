@@ -6,12 +6,12 @@ signal inventory_loaded(items: Array)  # Array of item dictionaries
 signal inventory_error(message: String)
 
 ## Add item to player's inventory
-func add_item(player_id: String, item_id: String, item_name: String, quantity: int = 1) -> void:
+func add_item(player_id: String, item_name: String, quantity: int = 1) -> void:
 	var response = await MongoDBClient.make_request(
 		"/players/%s/inventory" % player_id,
 		HTTPClient.METHOD_POST,
 		{
-			"itemId": item_id,
+			"itemId": 0,
 			"name": item_name,
 			"quantity": quantity
 		}
@@ -21,6 +21,7 @@ func add_item(player_id: String, item_id: String, item_name: String, quantity: i
 
 ## Get player's inventory
 func fetch_inventory(player_id: String) -> Array:
+	var game = get_tree().get_first_node_in_group("game")
 	var response = await MongoDBClient.make_request(
 		"/players/%s/inventory" % player_id,
 		HTTPClient.METHOD_GET
@@ -32,8 +33,7 @@ func fetch_inventory(player_id: String) -> Array:
 		# Transform MongoDB items to dictionary format
 		for item in response.get("inventory", []):
 			inventory_items.append({
-				"id": item.get("itemId", ""),
-				"name": item.get("name", "Unknown"),
+				"res": game.items[item.get("name", "Unknown")],
 				"quantity": item.get("quantity", 1),
 			})
 		

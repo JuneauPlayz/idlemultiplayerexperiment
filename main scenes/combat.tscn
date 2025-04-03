@@ -1,12 +1,34 @@
-[gd_scene load_steps=8 format=3 uid="uid://ctah7khl2mqy7"]
+[gd_scene load_steps=7 format=3 uid="uid://ctah7khl2mqy7"]
 
 [ext_resource type="Script" uid="uid://e02aed0l8rkc" path="res://scripts/combat.gd" id="1_rjxhl"]
 [ext_resource type="PackedScene" uid="uid://b4t1qu2vlkt18" path="res://main scenes/unit.tscn" id="2_n4hux"]
-[ext_resource type="Resource" uid="uid://bhnb1ovpehmf1" path="res://resources/basicatks/EnemyBasic.tres" id="3_23xym"]
-[ext_resource type="Resource" uid="uid://cpcm7bliucxsv" path="res://resources/basicatks/PhysicalBasic.tres" id="3_miwuo"]
-[ext_resource type="Resource" uid="uid://y41g00ber5gq" path="res://resources/abilities/EnemyAbility.tres" id="4_qjf4b"]
-[ext_resource type="Resource" uid="uid://cmj4ca6ay7uvv" path="res://resources/abilities/PhysicalAbility.tres" id="4_w5ifo"]
-[ext_resource type="Resource" uid="uid://cwa8uyf77q3me" path="res://resources/basicatks/HealingBasic.tres" id="7_qjf4b"]
+[ext_resource type="Script" uid="uid://dgh08i0tqr3qv" path="res://scripts/basic_atk.gd" id="3_miwuo"]
+[ext_resource type="Script" uid="uid://b2d0yt45weusj" path="res://scripts/ability.gd" id="4_w5ifo"]
+
+[sub_resource type="Resource" id="Resource_23xym"]
+script = ExtResource("3_miwuo")
+mana_gen = 15
+cast_timer = 1.5
+type = ""
+name = "Slap"
+value = 5
+element = "physical"
+damaging = true
+healing = false
+shielding = false
+metadata/_custom_type_script = "uid://dgh08i0tqr3qv"
+
+[sub_resource type="Resource" id="Resource_qjf4b"]
+script = ExtResource("4_w5ifo")
+mana_cost = 60
+type = ""
+name = "Punch"
+value = 15
+element = "physical"
+damaging = true
+healing = false
+shielding = false
+metadata/_custom_type_script = "uid://b2d0yt45weusj"
 
 [node name="Combat" type="Node2D" groups=["combat"]]
 script = ExtResource("1_rjxhl")
@@ -17,26 +39,24 @@ wait_time = 0.01
 [node name="Enemy" parent="." instance=ExtResource("2_n4hux")]
 position = Vector2(604, -9)
 max_health = 100
-basic_atk = ExtResource("3_23xym")
-ability = ExtResource("4_qjf4b")
+basic_atk = SubResource("Resource_23xym")
+ability = SubResource("Resource_qjf4b")
 
 [node name="Allies" type="Node2D" parent="."]
 
-[node name="RangedDPS" parent="Allies" instance=ExtResource("2_n4hux")]
+[node name="Tank" parent="Allies" instance=ExtResource("2_n4hux")]
+position = Vector2(365, -1)
 max_health = 100
-basic_atk = ExtResource("3_miwuo")
-ability = ExtResource("4_w5ifo")
 
-[node name="MeleeDPS" parent="Allies" instance=ExtResource("2_n4hux")]
-position = Vector2(213, -4)
-max_health = 100
-basic_atk = ExtResource("3_miwuo")
-ability = ExtResource("4_w5ifo")
+[node name="PhysicalDPS" parent="Allies" instance=ExtResource("2_n4hux")]
+position = Vector2(178, -1)
+max_health = 75
+
+[node name="MagicDPS" parent="Allies" instance=ExtResource("2_n4hux")]
+max_health = 60
 
 [node name="Healer" parent="Allies" instance=ExtResource("2_n4hux")]
 position = Vector2(-168, -1)
-max_health = 100
-basic_atk = ExtResource("7_qjf4b")
-ability = ExtResource("4_w5ifo")
+max_health = 80
 
 [connection signal="timeout" from="CombatTimer" to="." method="_on_combat_timer_timeout"]
